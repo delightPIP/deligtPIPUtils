@@ -1,23 +1,23 @@
 //
-//  ColorComponent.swift
+//  ColorComponents.swift
 //  betinged
 //
 //  Created by taeni on 6/24/25.
 //
-
 import Foundation
 import SwiftUI
 
-// MARK: - ColorComponent 구조체
-struct ColorComponent: Codable, Equatable, Hashable {
+// MARK: - ColorComponents 구조체
+/// Color 정보를 저장하고 직렬화할 수 있는 구조체
+struct ColorComponents: Codable, Equatable, Hashable {
     let red: Double
     let green: Double
     let blue: Double
     let alpha: Double
     
-    // MARK: - 생성자
+    // MARK: - 생성자들
     
-    /// SwiftUI Color로부터 ColorComponent 생성
+    /// SwiftUI Color로부터 ColorComponents 생성
     init(color: Color) {
         let uiColor = UIColor(color)
         var r: CGFloat = 0
@@ -115,8 +115,8 @@ struct ColorComponent: Codable, Equatable, Hashable {
     // MARK: - 유틸리티 메서드들
     
     /// 밝기 조절 (0.0 ~ 2.0, 1.0이 원본)
-    func adjustBrightness(_ factor: Double) -> ColorComponent {
-        ColorComponent(
+    func adjustBrightness(_ factor: Double) -> ColorComponents {
+        ColorComponents(
             red: min(1.0, red * factor),
             green: min(1.0, green * factor),
             blue: min(1.0, blue * factor),
@@ -125,9 +125,9 @@ struct ColorComponent: Codable, Equatable, Hashable {
     }
     
     /// 채도 조절 (0.0 ~ 2.0, 1.0이 원본)
-    func adjustSaturation(_ factor: Double) -> ColorComponent {
+    func adjustSaturation(_ factor: Double) -> ColorComponents {
         let hsb = hsbValues
-        return ColorComponent(
+        return ColorComponents(
             hue: hsb.hue,
             saturation: min(1.0, hsb.saturation * factor),
             brightness: hsb.brightness,
@@ -136,19 +136,19 @@ struct ColorComponent: Codable, Equatable, Hashable {
     }
     
     /// 알파 값 조절
-    func withAlpha(_ newAlpha: Double) -> ColorComponent {
-        ColorComponent(red: red, green: green, blue: blue, alpha: max(0, min(1, newAlpha)))
+    func withAlpha(_ newAlpha: Double) -> ColorComponents {
+        ColorComponents(red: red, green: green, blue: blue, alpha: max(0, min(1, newAlpha)))
     }
     
     /// 보색 계산
-    var complementary: ColorComponent {
-        ColorComponent(red: 1.0 - red, green: 1.0 - green, blue: 1.0 - blue, alpha: alpha)
+    var complementary: ColorComponents {
+        ColorComponents(red: 1.0 - red, green: 1.0 - green, blue: 1.0 - blue, alpha: alpha)
     }
     
     /// 그레이스케일 변환
-    var grayscale: ColorComponent {
+    var grayscale: ColorComponents {
         let gray = 0.299 * red + 0.587 * green + 0.114 * blue
-        return ColorComponent(red: gray, green: gray, blue: gray, alpha: alpha)
+        return ColorComponents(red: gray, green: gray, blue: gray, alpha: alpha)
     }
     
     /// 색상의 밝기 계산 (0.0 ~ 1.0)
@@ -168,52 +168,52 @@ protocol ColorStorable {
     var colorData: Data { get set }
     var color: Color { get }
     mutating func updateColor(_ newColor: Color)
-    mutating func updateColorComponent(_ component: ColorComponent)
+    mutating func updateColorComponents(_ components: ColorComponents)
 }
 
 // MARK: - ColorStorable 기본 구현
 extension ColorStorable {
     /// 저장된 Data로부터 Color 복원
     var color: Color {
-        if let component = try? JSONDecoder().decode(ColorComponent.self, from: colorData) {
-            return component.color
+        if let components = try? JSONDecoder().decode(ColorComponents.self, from: colorData) {
+            return components.color
         }
         return Color.clear
     }
     
-    /// 저장된 Data로부터 ColorComponent 복원
-    var ColorComponent: ColorComponent? {
-        try? JSONDecoder().decode(ColorComponent.self, from: colorData)
+    /// 저장된 Data로부터 ColorComponents 복원
+    var colorComponents: ColorComponents? {
+        try? JSONDecoder().decode(ColorComponents.self, from: colorData)
     }
     
     /// SwiftUI Color로 업데이트
     mutating func updateColor(_ newColor: Color) {
-        updateColorComponent(ColorComponent(color: newColor))
+        updateColorComponents(ColorComponents(color: newColor))
     }
     
-    /// ColorComponent로 업데이트
-    mutating func updateColorComponent(_ component: ColorComponent) {
-        if let encoded = try? JSONEncoder().encode(component) {
+    /// ColorComponents로 업데이트
+    mutating func updateColorComponents(_ components: ColorComponents) {
+        if let encoded = try? JSONEncoder().encode(components) {
             self.colorData = encoded
         }
     }
     
     /// Hex 문자열로 업데이트
     mutating func updateColor(hex: String) {
-        updateColorComponent(ColorComponent(hex: hex))
+        updateColorComponents(ColorComponents(hex: hex))
     }
     
     /// Color를 Data로 변환하는 정적 헬퍼 메서드
     static func colorToData(_ color: Color) -> Data {
-        if let colorData = try? JSONEncoder().encode(ColorComponent(color: color)) {
+        if let colorData = try? JSONEncoder().encode(ColorComponents(color: color)) {
             return colorData
         }
         return Data()
     }
     
-    /// ColorComponent를 Data로 변환하는 정적 헬퍼 메서드
-    static func componentToData(_ component: ColorComponent) -> Data {
-        if let colorData = try? JSONEncoder().encode(component) {
+    /// ColorComponents를 Data로 변환하는 정적 헬퍼 메서드
+    static func componentsToData(_ components: ColorComponents) -> Data {
+        if let colorData = try? JSONEncoder().encode(components) {
             return colorData
         }
         return Data()
@@ -221,18 +221,18 @@ extension ColorStorable {
 }
 
 // MARK: - 사전 정의된 색상들
-extension ColorComponent {
-    static let clear = ColorComponent(red: 0, green: 0, blue: 0, alpha: 0)
-    static let black = ColorComponent(red: 0, green: 0, blue: 0, alpha: 1)
-    static let white = ColorComponent(red: 1, green: 1, blue: 1, alpha: 1)
-    static let red = ColorComponent(red: 1, green: 0, blue: 0, alpha: 1)
-    static let green = ColorComponent(red: 0, green: 1, blue: 0, alpha: 1)
-    static let blue = ColorComponent(red: 0, green: 0, blue: 1, alpha: 1)
-    static let yellow = ColorComponent(red: 1, green: 1, blue: 0, alpha: 1)
-    static let orange = ColorComponent(red: 1, green: 0.5, blue: 0, alpha: 1)
-    static let purple = ColorComponent(red: 0.5, green: 0, blue: 0.5, alpha: 1)
-    static let pink = ColorComponent(red: 1, green: 0.75, blue: 0.8, alpha: 1)
-    static let gray = ColorComponent(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
+extension ColorComponents {
+    static let clear = ColorComponents(red: 0, green: 0, blue: 0, alpha: 0)
+    static let black = ColorComponents(red: 0, green: 0, blue: 0, alpha: 1)
+    static let white = ColorComponents(red: 1, green: 1, blue: 1, alpha: 1)
+    static let red = ColorComponents(red: 1, green: 0, blue: 0, alpha: 1)
+    static let green = ColorComponents(red: 0, green: 1, blue: 0, alpha: 1)
+    static let blue = ColorComponents(red: 0, green: 0, blue: 1, alpha: 1)
+    static let yellow = ColorComponents(red: 1, green: 1, blue: 0, alpha: 1)
+    static let orange = ColorComponents(red: 1, green: 0.5, blue: 0, alpha: 1)
+    static let purple = ColorComponents(red: 0.5, green: 0, blue: 0.5, alpha: 1)
+    static let pink = ColorComponents(red: 1, green: 0.75, blue: 0.8, alpha: 1)
+    static let gray = ColorComponents(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 }
 
 // MARK: - 사용 예시 구조체
@@ -243,8 +243,8 @@ struct ColorPreference: ColorStorable {
         updateColor(color)
     }
     
-    init(component: ColorComponent) {
-        updateColorComponent(component)
+    init(components: ColorComponents) {
+        updateColorComponents(components)
     }
     
     init(hex: String) {
