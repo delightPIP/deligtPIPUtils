@@ -1,0 +1,31 @@
+//
+//  Untitled.swift
+//  deligtPIPUtils
+//
+//  Created by taeni on 9/13/25.
+//
+//
+//<!-- Info.plist에 추가해야 할 키들 -->
+//
+//<!-- iOS 17+ 새로운 권한 키들 -->
+//<!-- 쓰기 전용 접근을 위한 키 -->
+//<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+//<string>This app needs write-only access to add routine events to your calendar without reading your existing events.</string>
+//
+//<!-- 전체 접근을 위한 키 -->
+//<key>NSCalendarsFullAccessUsageDescription</key>
+//<string>This app needs full access to read and manage your calendar events to provide comprehensive routine tracking and scheduling features.</string>
+//
+//<!-- 리마인더 접근을 위한 키 -->
+//<key>NSRemindersUsageDescription</key>
+//<string>This app creates reminders for your routine activities to help you stay on track with your goals.</string>
+//
+//<!-- 레거시 지원을 위한 키 (iOS 16 이하) -->
+//<key>NSCalendarsUsageDescription</key>
+//<string>This app needs access to your calendar to create and manage routine events.</string>
+//
+//<!-- 선택적: 백그라운드 앱 새로고침 -->
+//<key>UIBackgroundModes</key>
+//<array>
+//    <string>background-processing</string>
+//</array>

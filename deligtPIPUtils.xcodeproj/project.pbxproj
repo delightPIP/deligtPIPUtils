@@ -29,9 +29,34 @@
 		0591DB4D2E0A690F00DB687B /* deligtPIPUtilsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = deligtPIPUtilsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		058BD1CA2E7508A600AAF08B /* Exceptions for "deligtPIPUtils" folder in "deligtPIPUtils" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Kit/Event/Infoplist.txt,
+			);
+			target = 0591DB332E0A690E00DB687B /* deligtPIPUtils */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		058BD1CB2E7508A600AAF08B /* Exceptions for "deligtPIPUtils" folder in "Compile Sources" phase from "deligtPIPUtils" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 0591DB302E0A690E00DB687B /* Sources */;
+			membershipExceptions = (
+				Kit/Event/Infoplist.txt,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0591DB362E0A690E00DB687B /* deligtPIPUtils */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				058BD1CA2E7508A600AAF08B /* Exceptions for "deligtPIPUtils" folder in "deligtPIPUtils" target */,
+				058BD1CB2E7508A600AAF08B /* Exceptions for "deligtPIPUtils" folder in "Compile Sources" phase from "deligtPIPUtils" target */,
+			);
 			path = deligtPIPUtils;
 			sourceTree = "<group>";
 		};
@@ -400,6 +425,10 @@
 				DEVELOPMENT_TEAM = TZ7845HC7Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = deligtPIPUtils/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "앱에서 캘린더 이벤트를 관리하고 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "층수 측정을 위해 기압계 접근이 필요합니다.";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "앱에서 리마인더를 관리하고 표시하기 위해 리마인더 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +457,10 @@
 				DEVELOPMENT_TEAM = TZ7845HC7Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = deligtPIPUtils/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "앱에서 캘린더 이벤트를 관리하고 일정을 표시하기 위해 캘린더 접근 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "층수 측정을 위해 기압계 접근이 필요합니다.";
+				INFOPLIST_KEY_NSRemindersUsageDescription = "앱에서 리마인더를 관리하고 표시하기 위해 리마인더 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>앱에서 캘린더 이벤트를 생성, 편집, 삭제하기 위해 캘린더 전체 접근 권한이 필요합니다.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>앱에서 리마인더를 생성, 편집, 삭제하기 위해 리마인더 전체 접근 권한이 필요합니다.</string>
+</dict>
+</plist>

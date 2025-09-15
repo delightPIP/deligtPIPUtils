@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  deligtPIPUtils
+//  beTinged
 //
-//  Created by taeni on 6/24/25.
+//  Created by taeni on 7/12/25.
 //
 
 import SwiftUI
@@ -11,8 +11,40 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    
+    @State private var selectedTab = 0
 
     var body: some View {
+        TabView(selection: $selectedTab) {
+            // 기존 아이템 목록 탭
+            originalItemsView
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text("아이템")
+                }
+                .tag(0)
+            
+            // 새로운 EventKit 기능 탭
+            EventKitSampleView()
+                .tabItem {
+                    Image(systemName: "calendar.badge.plus")
+                    Text("캘린더")
+                }
+                .tag(1)
+            
+            
+            FloorContentView()
+                .tabItem {
+                    Image(systemName: "stairs")
+                    Text("CoreMotion")
+                }
+                .tag(2)
+        }
+    }
+    
+    // MARK: - 기존 아이템 뷰
+    
+    private var originalItemsView: some View {
         NavigationSplitView {
             List {
                 ForEach(items) { item in
@@ -24,6 +56,7 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
+            .navigationTitle("아이템")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
