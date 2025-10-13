@@ -25,7 +25,7 @@ struct ContentView: View {
                 .tag(0)
             
             // 새로운 EventKit 기능 탭
-            EventKitSampleView()
+            EventListViewView()
                 .tabItem {
                     Image(systemName: "calendar.badge.plus")
                     Text("캘린더")
