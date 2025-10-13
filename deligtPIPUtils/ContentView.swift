@@ -24,11 +24,17 @@ struct ContentView: View {
                 }
                 .tag(0)
             
-            // 새로운 EventKit 기능 탭
             EventListViewView()
                 .tabItem {
                     Image(systemName: "calendar.badge.plus")
                     Text("캘린더")
+                }
+                .tag(1)
+            
+            AddressValidatorView()
+                .tabItem {
+                    Image(systemName: "envelope.front")
+                    Text("정규표현식")
                 }
                 .tag(1)
             
